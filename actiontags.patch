@@ -1,0 +1,16 @@
+diff --git a/PDF/index.php b/PDF/index.php
+index 8263a80..de248b4 100644
+--- a/PDF/index.php
++++ b/PDF/index.php
+@@ -372,5 +372,11 @@ if (!defined("API") && !defined("PLUGIN") && !(isset($_GET['s']) && !empty($_GET
+ 	Logging::logEvent("", "redcap_metadata", "MANAGE", $page, "form_name = $page", $logging_description);
+ }
+ 
++
++// include custom code
++include dirname(__FILE__)."/../../customizations/pdf_action_tags.php";
++// apply custom action tags
++$metadata = gr_apply_pdf_actiontags($metadata, $Data);
++
+ // Render the PDF
+ renderPDF($metadata, $acknowledgement, strip_tags(label_decode($app_title)), $Data, isset($_GET['compact']));
